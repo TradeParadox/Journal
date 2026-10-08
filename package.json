@@ -1,0 +1,7 @@
+{
+  "name": "sreejith-trade-paradox",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Trading journal and backtester",
+  "engines": { "node": ">=18" }
+}
