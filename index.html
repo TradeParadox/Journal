@@ -4,6 +4,8 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
 <title>Sreejith Trade Paradox</title>
+<link rel="icon" type="image/png" href="favicon.png">
+<link rel="apple-touch-icon" href="logo-icon.png">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Schibsted+Grotesk:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500;600&display=swap">
@@ -11,30 +13,32 @@
 /* Layout: left rail (nav, currency, theme) + content column. Dashboard = KPI strip, equity curve beside a six-axis score radar, daily bars beside a win/loss ring, then recent trades. Phones swap the rail for a bottom tab bar. Profit/loss colors are semantic and always paired with a +/- sign. */
 :root{
   color-scheme:light;
-  --bg:#eceff5; --surface:#ffffff; --surface-2:#f4f6fb; --ink:#12151f; --ink-2:#4a5163; --ink-3:#757c91;
-  --line:#dde1ec; --line-2:#eceff6; --accent:#3347e0; --accent-ink:#ffffff; --accent-soft:#e6e9fd;
+  --hero-1:#0b0a07; --hero-2:#221a09; --hero-ink:#fbf6e8; --hero-mute:#cdc2a6; --hero-line:rgba(255,230,170,.22);
+  --bg:#f1efe9; --surface:#ffffff; --surface-2:#f7f5ef; --ink:#14120c; --ink-2:#4d483c; --ink-3:#797362;
+  --line:#e1ddd0; --line-2:#eeebe2; --accent:#c9971c; --accent-ink:#17120a; --accent-text:#876006; --accent-soft:#f6ecd0; --alt:#2563c9;
   --pos:#0c8a60; --pos-soft:#dcf3ea; --neg:#cc3b34; --neg-soft:#fbe4e2; --warn:#a56a0c; --warn-soft:#fbefd6;
-  --scrim:rgba(14,18,30,.45); --shadow:0 1px 2px rgba(18,21,31,.05),0 10px 28px rgba(18,21,31,.06);
+  --scrim:rgba(20,15,6,.5); --shadow:0 1px 2px rgba(20,16,6,.06),0 10px 28px rgba(20,16,6,.08);
   --font-ui:"Schibsted Grotesk",system-ui,-apple-system,"Segoe UI",Roboto,sans-serif;
   --font-num:"IBM Plex Mono",ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;
 }
 @media (prefers-color-scheme: dark){
   :root:not([data-theme="light"]){
-    --bg:#0b0e15; --surface:#131824; --surface-2:#1a2132; --ink:#e8ebf4; --ink-2:#a8aec3; --ink-3:#7b839a;
-    --line:#252c40; --line-2:#1d2436; --accent:#7a8bff; --accent-ink:#0b0e15; --accent-soft:#222a55;
+    --bg:#0c0b08; --surface:#16140e; --surface-2:#1f1c14; --ink:#f1ecdd; --ink-2:#bfb7a1; --ink-3:#8d8672;
+    --line:#2d291d; --line-2:#232016; --accent:#e2b04a; --accent-ink:#15110a; --accent-text:#ecc15e; --accent-soft:#2f2412; --alt:#6ea8ff;
     --pos:#3dcf9b; --pos-soft:#11372b; --neg:#ff7d75; --neg-soft:#42211f; --warn:#e8b04f; --warn-soft:#3b2d12;
     --scrim:rgba(0,0,0,.6); --shadow:0 1px 2px rgba(0,0,0,.4),0 10px 28px rgba(0,0,0,.35);
     color-scheme:dark;
   }
 }
 :root[data-theme="dark"]{
-  --bg:#0b0e15; --surface:#131824; --surface-2:#1a2132; --ink:#e8ebf4; --ink-2:#a8aec3; --ink-3:#7b839a;
-  --line:#252c40; --line-2:#1d2436; --accent:#7a8bff; --accent-ink:#0b0e15; --accent-soft:#222a55;
+  --bg:#0c0b08; --surface:#16140e; --surface-2:#1f1c14; --ink:#f1ecdd; --ink-2:#bfb7a1; --ink-3:#8d8672;
+  --line:#2d291d; --line-2:#232016; --accent:#e2b04a; --accent-ink:#15110a; --accent-text:#ecc15e; --accent-soft:#2f2412; --alt:#6ea8ff;
   --pos:#3dcf9b; --pos-soft:#11372b; --neg:#ff7d75; --neg-soft:#42211f; --warn:#e8b04f; --warn-soft:#3b2d12;
   --scrim:rgba(0,0,0,.6); --shadow:0 1px 2px rgba(0,0,0,.4),0 10px 28px rgba(0,0,0,.35);
   color-scheme:dark;
 }
 *{box-sizing:border-box}
+.brand-img{width:34px;height:34px;flex:none;border-radius:9px;background:#fff;object-fit:cover;box-shadow:0 0 0 1px var(--line)}
 [hidden]{display:none!important}
 html{padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
 body{margin:0}
@@ -54,7 +58,7 @@ h1,h2,h3,p,dl,dd{margin:0}
 .nav{display:flex;flex-direction:column;gap:2px}
 .nav button,.tabbar button{display:flex;align-items:center;gap:10px;background:none;border:0;border-radius:10px;padding:9px 10px;color:var(--ink-2);font-weight:500;text-align:left}
 .nav button:hover{background:var(--surface-2);color:var(--ink)}
-.nav button[aria-current="true"]{background:var(--accent-soft);color:var(--accent);font-weight:600}
+.nav button[aria-current="true"]{background:var(--accent-soft);color:var(--accent-text);font-weight:600}
 .nav svg,.tabbar svg{width:18px;height:18px;flex:none;stroke:currentColor;fill:none;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round}
 .rail-set{display:flex;flex-direction:column;gap:10px;border-top:1px solid var(--line-2);padding-top:16px}
 .rail-set label{font-size:11px;letter-spacing:.08em;text-transform:uppercase;color:var(--ink-3);font-weight:600}
@@ -70,7 +74,7 @@ h1,h2,h3,p,dl,dd{margin:0}
 .seg-ctl button[aria-pressed="true"]{background:var(--accent);color:var(--accent-ink)}
 .btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;border:1px solid var(--line);background:var(--surface);color:var(--ink);border-radius:10px;padding:8px 14px;font-weight:600;font-size:13px}
 .btn:hover{background:var(--surface-2)}
-.btn.pri{background:var(--accent);border-color:var(--accent);color:var(--accent-ink)}
+.btn.pri{background:linear-gradient(90deg,#f0cc6a,var(--accent));border-color:var(--accent);color:var(--accent-ink)}
 .btn.pri:hover{filter:brightness(1.08)}
 .btn.danger{color:var(--neg);border-color:var(--neg)}
 .btn.sm{padding:5px 10px;font-size:12px}
@@ -104,7 +108,7 @@ h1,h2,h3,p,dl,dd{margin:0}
 .gl{stroke:var(--line-2);stroke-width:1} .zl{stroke:var(--line);stroke-width:1.5}
 .fp{fill:var(--pos)} .fn{fill:var(--neg)} .fa{fill:var(--accent)} .fb{fill:var(--ink-3)}
 .xh{stroke:var(--ink-3);stroke-width:1;stroke-dasharray:3 3}
-.score{font-family:var(--font-num);font-size:26px;font-weight:500;color:var(--accent)}
+.score{font-family:var(--font-num);font-size:26px;font-weight:500;color:var(--accent-text)}
 .sub-sc{display:grid;grid-template-columns:1fr 1fr;gap:6px 18px;margin-top:8px}
 .sub-sc div{display:flex;justify-content:space-between;gap:8px;font-size:12px;color:var(--ink-2);border-bottom:1px solid var(--line-2);padding-bottom:4px}
 .sub-sc b{font-family:var(--font-num);font-weight:500;color:var(--ink)}
@@ -126,7 +130,7 @@ tbody tr:hover{background:var(--surface-2)}
 tbody tr:focus-visible{outline-offset:-2px}
 .r{text-align:right}
 .pill{display:inline-block;padding:2px 8px;border-radius:999px;font-size:11px;font-weight:600;letter-spacing:.02em}
-.pill.long{background:var(--accent-soft);color:var(--accent)}
+.pill.long{background:var(--accent-soft);color:var(--accent-text)}
 .pill.short{background:var(--surface-2);color:var(--ink-2);border:1px solid var(--line)}
 .pill.mis{background:var(--warn-soft);color:var(--warn)}
 .toolbar{display:grid;grid-template-columns:minmax(160px,2fr) repeat(3,minmax(110px,1fr));gap:10px;margin-bottom:12px}
@@ -200,7 +204,7 @@ textarea.field-in{min-height:84px;resize:vertical}
   .rail{display:none}
   .tabbar{display:grid;grid-template-columns:repeat(6,1fr);position:fixed;left:0;right:0;bottom:0;z-index:30;background:var(--surface);border-top:1px solid var(--line);padding:6px 8px calc(6px + env(safe-area-inset-bottom,0px))}
   .tabbar button{flex-direction:column;gap:3px;font-size:10px;justify-content:center;align-items:center;padding:6px 1px}
-  .tabbar button[aria-current="true"]{color:var(--accent);font-weight:600}
+  .tabbar button[aria-current="true"]{color:var(--accent-text);font-weight:600}
   .top h1{font-size:22px}
   .toolbar{grid-template-columns:1fr 1fr}
   .toolbar .q{grid-column:1/-1}
@@ -216,14 +220,69 @@ textarea.field-in{min-height:84px;resize:vertical}
   .sub-sc{grid-template-columns:1fr}
   .hb{grid-template-columns:minmax(64px,1fr) minmax(0,1.6fr) minmax(62px,.9fr)}
 }
-.auth{position:fixed;inset:0;z-index:100;background:var(--bg);display:flex;align-items:center;justify-content:center;padding:16px;overflow:auto}
+.auth{position:fixed;inset:0;z-index:100;background:var(--bg);overflow:auto}
+.lp-nav{position:sticky;top:0;z-index:5;background:var(--surface);border-bottom:1px solid var(--line);padding-top:env(safe-area-inset-top,0px)}
+.lp-nav-in{max-width:1200px;margin:0 auto;padding:12px 16px;display:flex;align-items:center;justify-content:space-between;gap:12px}
+.lp-name{white-space:nowrap}
+.lp-links{display:flex;gap:2px;background:var(--surface-2);border-radius:12px;padding:4px}
+.lp-links button{background:none;border:0;padding:8px 14px;border-radius:9px;font-weight:500;color:var(--ink-2)}
+.lp-links button:hover{background:var(--surface);color:var(--ink)}
+.lp-act{display:flex;align-items:center;gap:8px}
+.lp-hero{background:radial-gradient(760px 380px at 85% -10%,rgba(214,164,52,.26),transparent 62%),linear-gradient(160deg,var(--hero-1),var(--hero-2));color:var(--hero-ink)}
+.lp-hero-in{max-width:1200px;margin:0 auto;padding:72px 16px 80px;display:grid;grid-template-columns:minmax(0,1.1fr) minmax(0,.9fr);gap:48px;align-items:center}
+.lp-eye{font-size:12px;letter-spacing:.16em;text-transform:uppercase;font-weight:600;color:#e6c46a;margin:0 0 16px}
+.lp-hero h1{font-size:clamp(36px,5.2vw,60px);line-height:1.04;letter-spacing:-.035em;font-weight:700;text-wrap:balance;margin:0}
+.lp-hero h1 span{display:block;background:linear-gradient(90deg,#ffe08a,#d9a62e);-webkit-background-clip:text;background-clip:text;color:transparent}
+.lp-sub{font-size:18px;line-height:1.55;color:var(--hero-mute);max-width:52ch;margin:20px 0 0}
+.lp-btns{display:flex;flex-wrap:wrap;gap:12px;margin-top:28px}
+.lp-btns .btn,.lp-band .btn{padding:12px 22px;font-size:15px;border-radius:12px}
+.lp-cta{background:linear-gradient(90deg,#f3d273,#c9971c);border:0;color:#17120a}
+.lp-cta:hover{filter:brightness(1.07);background:linear-gradient(90deg,#f3d273,#c9971c)}
+.lp-ghost{background:transparent;border-color:var(--hero-line);color:var(--hero-ink)}
+.lp-ghost:hover{background:rgba(255,236,190,.1)}
+.lp-note{font-size:13px;color:var(--hero-mute);margin:18px 0 0}
+.lp-prev{background:rgba(255,255,255,.06);border:1px solid var(--hero-line);border-radius:18px;padding:18px;min-width:0}
+.lp-prev-h{display:flex;justify-content:space-between;gap:8px;font-size:12px;color:var(--hero-mute);margin-bottom:14px}
+.lp-kp{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:8px;margin-bottom:12px}
+.lp-kp div{background:rgba(255,255,255,.06);border-radius:10px;padding:10px 12px;min-width:0}
+.lp-kp small{display:block;font-size:11px;color:var(--hero-mute)}
+.lp-kp b{font-family:var(--font-num);font-weight:500;font-size:16px;overflow-wrap:anywhere}
+.lp-kp b.up{color:#58e0ac}
+.lp-chart{display:block;height:130px}
+.lp-sec{max-width:1200px;margin:0 auto;padding:64px 16px 24px}
+.lp-sec h2,.lp-band h2{font-size:clamp(24px,3vw,34px);letter-spacing:-.02em;font-weight:700;text-wrap:balance}
+.lp-lead{color:var(--ink-2);margin-top:8px;max-width:60ch;font-size:16px}
+.lp-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(230px,1fr));gap:12px;margin-top:28px}
+.lp-card{background:var(--surface);border:1px solid var(--line);border-radius:14px;padding:20px;min-width:0}
+.lp-card h3{font-size:16px;font-weight:600;margin:14px 0 6px}
+.lp-card p{color:var(--ink-2);margin:0}
+.lp-ic{display:inline-flex;width:40px;height:40px;border-radius:10px;background:var(--accent-soft);align-items:center;justify-content:center}
+.lp-ic svg{width:20px;height:20px;stroke:var(--accent);fill:none;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round}
+.lp-band{margin-top:48px;background:var(--accent-soft)}
+.lp-band-in{max-width:1200px;margin:0 auto;padding:36px 16px;display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:16px}
+.lp-foot{max-width:1200px;margin:0 auto;padding:28px 16px calc(32px + env(safe-area-inset-bottom,0px));display:flex;flex-wrap:wrap;justify-content:space-between;gap:10px 24px;color:var(--ink-3);font-size:13px}
+.lp-foot p{margin:0}
+.au-modal{position:fixed;inset:0;z-index:110;background:var(--scrim);display:flex;align-items:center;justify-content:center;padding:16px;overflow:auto}
+.au-card{position:relative}
+.au-x{position:absolute;top:14px;right:14px}
+@media (max-width:900px){
+  .lp-hero-in{grid-template-columns:minmax(0,1fr);padding-block:48px 56px;gap:32px}
+}
+@media (max-width:760px){
+  .lp-links{display:none}
+  .lp-sub{font-size:16px}
+}
+@media (max-width:420px){
+  .lp-name{display:none}
+  .lp-act .btn{padding:8px 12px}
+}
 .au-card{background:var(--surface);border:1px solid var(--line);border-radius:16px;padding:26px;width:min(400px,100%);display:flex;flex-direction:column;gap:14px;box-shadow:var(--shadow)}
 .au-card h1{font-size:24px;letter-spacing:-.02em;font-weight:700}
 .au-card form{display:flex;flex-direction:column;gap:12px}
 .au-card .seg-ctl{align-self:flex-start}
 .au-msg{font-size:13px;color:var(--neg);min-height:18px}
 .au-msg.ok{color:var(--pos)}
-.linkbtn{border:0;background:none;color:var(--accent);font-weight:600;font-size:13px;padding:2px 0;align-self:flex-start}
+.linkbtn{border:0;background:none;color:var(--accent-text);font-weight:600;font-size:13px;padding:2px 0;align-self:flex-start}
 .acc{display:grid;gap:12px;max-width:560px}
 .bt-top{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:16px}
 .bt-panel{display:flex;flex-direction:column;gap:12px;min-width:0}
@@ -249,7 +308,7 @@ details.card[open] summary{margin-bottom:12px}
 <div class="app">
   <aside class="rail" aria-label="Main">
     <div class="brand">
-      <svg width="28" height="28" viewBox="0 0 28 28" aria-hidden="true"><rect width="28" height="28" rx="8" style="fill:var(--accent)"/><path d="M8 19V12M14 21V8M20 17V11" style="stroke:var(--accent-ink)" stroke-width="2.6" stroke-linecap="round"/></svg>
+      <img class="brand-img" src="logo-icon.png" width="34" height="34" alt="" decoding="async">
       Sreejith Trade Paradox
     </div>
     <nav class="nav" id="nav">
@@ -333,21 +392,111 @@ details.card[open] summary{margin-bottom:12px}
   </div>
 </div>
 <div class="auth" id="auth">
-  <div class="au-card">
-    <div class="brand">
-      <svg width="28" height="28" viewBox="0 0 28 28" aria-hidden="true"><rect width="28" height="28" rx="8" style="fill:var(--accent)"/><path d="M8 19V12M14 21V8M20 17V11" style="stroke:var(--accent-ink)" stroke-width="2.6" stroke-linecap="round"/></svg>
-      Sreejith Trade Paradox
+  <header class="lp-nav">
+    <div class="lp-nav-in">
+      <div class="brand">
+        <img class="brand-img" src="logo-icon.png" width="34" height="34" alt="" decoding="async">
+        <span class="lp-name">Sreejith Trade Paradox</span>
+      </div>
+      <nav class="lp-links" aria-label="Sections">
+        <button type="button" data-scroll="lp-features">Features</button>
+        <button type="button" data-scroll="lp-backtest">Backtesting</button>
+        <button type="button" data-auth="signup">Get started</button>
+      </nav>
+      <div class="lp-act">
+        <button class="btn" type="button" data-auth="login">Log in</button>
+        <button class="btn pri" type="button" data-auth="signup">Sign up free</button>
+      </div>
     </div>
-    <div><h1 id="au-h">Welcome back</h1><p class="muted" id="au-p" style="margin-top:4px">Log in to open your trading journal.</p></div>
-    <div class="seg-ctl" id="au-tabs"><button type="button" data-am="login" aria-pressed="true">Log in</button><button type="button" data-am="signup" aria-pressed="false">Sign up</button></div>
-    <form id="au-form" novalidate>
-      <div class="f" id="au-ef"><label for="au-email">Email</label><input class="field-in" id="au-email" type="email" autocomplete="email"></div>
-      <div class="f" id="au-pf"><label for="au-pw" id="au-pl">Password</label><input class="field-in" id="au-pw" type="password" autocomplete="current-password"></div>
-      <button class="btn pri" id="au-go" type="submit">Log in</button>
-      <button class="btn" id="au-g" type="button" hidden>Continue with Google</button>
-      <button class="linkbtn" id="au-forgot" type="button">Forgot password?</button>
-      <div class="au-msg" id="au-msg" role="alert"></div>
-    </form>
+  </header>
+
+  <div class="lp-body">
+    <section class="lp-hero">
+      <div class="lp-hero-in">
+        <div class="lp-copy">
+          <p class="lp-eye">Trading journal and backtester</p>
+          <h1>Know why you win.<span>Fix why you lose.</span></h1>
+          <p class="lp-sub">Log every trade, spot the habits that cost you money, and test your ideas on real price history. One place, built for traders.</p>
+          <div class="lp-btns">
+            <button class="btn lp-cta" type="button" data-auth="signup">Start free</button>
+            <button class="btn lp-ghost" type="button" data-auth="login">Log in</button>
+          </div>
+          <p class="lp-note">Works with crypto, Indian stocks and indices, forex and your own CSV files.</p>
+        </div>
+        <div class="lp-prev" aria-hidden="true">
+          <div class="lp-prev-h"><span>Example account</span><span>Last 90 days</span></div>
+          <div class="lp-kp">
+            <div><small>Net P&amp;L</small><b class="up">+₹33,532</b></div>
+            <div><small>Win rate</small><b>54.2%</b></div>
+            <div><small>Profit factor</small><b>1.31</b></div>
+          </div>
+          <svg viewBox="0 0 360 130" width="100%" preserveAspectRatio="none" class="lp-chart">
+            <defs><linearGradient id="lpg" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#e9c35f" stop-opacity=".35"/><stop offset="1" stop-color="#e9c35f" stop-opacity="0"/></linearGradient></defs>
+            <path d="M0 110L20 100L40 104L60 88L80 92L100 76L120 82L140 64L160 70L180 52L200 58L220 40L240 46L260 30L280 36L300 22L320 28L340 14L360 18L360 130L0 130Z" fill="url(#lpg)"/>
+            <path d="M0 110L20 100L40 104L60 88L80 92L100 76L120 82L140 64L160 70L180 52L200 58L220 40L240 46L260 30L280 36L300 22L320 28L340 14L360 18" fill="none" stroke="#e9c35f" stroke-width="2.2" stroke-linejoin="round" stroke-linecap="round" vector-effect="non-scaling-stroke"/>
+          </svg>
+        </div>
+      </div>
+    </section>
+
+    <section class="lp-sec" id="lp-features">
+      <h2>Everything in one place</h2>
+      <p class="lp-lead">Record the trade, review the result, and test the next idea without leaving the page.</p>
+      <div class="lp-grid">
+        <article class="lp-card">
+          <span class="lp-ic"><svg viewBox="0 0 24 24"><path d="M5 4h11a3 3 0 0 1 3 3v13H8a3 3 0 0 1-3-3z"/><path d="M9 9h6M9 13h6"/></svg></span>
+          <h3>Trade journal</h3>
+          <p>Log entries, exits, stops and fees. Tag the setup and the mistake, rate how well you followed your plan, and keep notes on every trade.</p>
+        </article>
+        <article class="lp-card">
+          <span class="lp-ic"><svg viewBox="0 0 24 24"><path d="M4 20V10M10 20V4M16 20v-8M22 20H2"/></svg></span>
+          <h3>Performance analytics</h3>
+          <p>Equity curve, win rate, profit factor, expectancy and drawdown, plus a six-part score that shows where your edge is weak.</p>
+        </article>
+        <article class="lp-card">
+          <span class="lp-ic"><svg viewBox="0 0 24 24"><rect x="3" y="5" width="18" height="16" rx="2.5"/><path d="M3 10h18M8 3v4M16 3v4"/></svg></span>
+          <h3>P&amp;L calendar</h3>
+          <p>See every trading day at a glance, green or red, with trade counts and weekly totals.</p>
+        </article>
+        <article class="lp-card" id="lp-backtest">
+          <span class="lp-ic"><svg viewBox="0 0 24 24"><path d="M3 17l5-6 4 3 8-9"/><path d="M3 21h18"/></svg></span>
+          <h3>Backtesting</h3>
+          <p>Test moving-average, RSI and breakout rules on real price history from Binance, Yahoo Finance or your own CSV. Compare two assets side by side.</p>
+        </article>
+      </div>
+    </section>
+
+    <section class="lp-band">
+      <div class="lp-band-in">
+        <h2>Ready to review your trades?</h2>
+        <button class="btn lp-cta" type="button" data-auth="signup">Create your account</button>
+      </div>
+    </section>
+
+    <footer class="lp-foot">
+      <p>Trading involves risk. Backtests use past data and do not predict future results.</p>
+      <p><button type="button" class="linkbtn" data-auth="login">Log in</button> <button type="button" class="linkbtn" data-auth="signup">Sign up</button></p>
+    </footer>
+  </div>
+
+  <div class="au-modal" id="au-modal" hidden>
+    <div class="au-card" role="dialog" aria-modal="true" aria-labelledby="au-h">
+      <button class="btn sm au-x" id="au-x" type="button" aria-label="Close">Close</button>
+      <div class="brand">
+        <img class="brand-img" src="logo-icon.png" width="34" height="34" alt="" decoding="async">
+        Sreejith Trade Paradox
+      </div>
+      <div><h1 id="au-h">Welcome back</h1><p class="muted" id="au-p" style="margin-top:4px">Log in to open your trading journal.</p></div>
+      <div class="seg-ctl" id="au-tabs"><button type="button" data-am="login" aria-pressed="true">Log in</button><button type="button" data-am="signup" aria-pressed="false">Sign up</button></div>
+      <form id="au-form" novalidate>
+        <div class="f" id="au-ef"><label for="au-email">Email</label><input class="field-in" id="au-email" type="email" autocomplete="email"></div>
+        <div class="f" id="au-pf"><label for="au-pw" id="au-pl">Password</label><input class="field-in" id="au-pw" type="password" autocomplete="current-password"></div>
+        <button class="btn pri" id="au-go" type="submit">Log in</button>
+        <button class="btn" id="au-g" type="button" hidden>Continue with Google</button>
+        <button class="linkbtn" id="au-forgot" type="button">Forgot password?</button>
+        <div class="au-msg" id="au-msg" role="alert"></div>
+      </form>
+    </div>
   </div>
 </div>
 <div class="toast" id="toast" hidden></div>
@@ -959,7 +1108,7 @@ function btOut(){
   var desc=BT_NAMES[st.type]+' ('+(st.type==='rsi'?st.p1+', buy <'+st.lo+(st.short?', short >'+st.hi:''):st.type==='donchian'?st.p1:st.p1+' / '+st.p2)+')'+(st.short?', long and short':', long only')+(st.sl>0?', stop '+st.sl+'%':'')+(st.tp>0?', target '+st.tp+'%':'');
   var head='<th>Measure</th>'+R.map(function(a){return '<th class="r">'+esc(a.label)+'<br><span style="text-transform:none;letter-spacing:0;font-weight:400">'+esc(a.src+' · '+a.tf)+'</span></th>'}).join('');
   var body=rows.map(function(r){return '<tr style="cursor:default"><td>'+r[0]+'</td>'+R.map(function(a){return '<td class="r num">'+r[1](a.bt.stats)+'</td>'}).join('')+'</tr>'}).join('');
-  var cols={a:'var(--accent)',b:'var(--warn)'};
+  var cols={a:'var(--accent)',b:'var(--alt)'};
   var legend=R.map(function(a){return '<span><i style="border-color:'+cols[a.k]+'"></i>'+esc(a.label)+' strategy</span><span><i class="d" style="border-color:'+cols[a.k]+'"></i>'+esc(a.label)+' buy and hold</span>'}).join('');
   return '<section class="card" style="margin-top:12px"><div class="ch"><h2>Results</h2><span class="muted">'+esc(desc)+'</span></div><div class="tw"><table class="rt"><thead><tr>'+head+'</tr></thead><tbody>'+body+'</tbody></table></div>'+
     '<p class="muted" style="font-size:12px;margin-top:10px">Trades are entered at the open after a signal. Slippage is not modelled. If one candle touches both stop and target, the stop is assumed to hit first. Past results do not predict future results.</p></section>'+
@@ -972,7 +1121,7 @@ function btOut(){
 /* charts */
 function btColors(){
   var cs=getComputedStyle(document.documentElement),g=function(n){return cs.getPropertyValue(n).trim()};
-  return {bg:g('--surface'),tx:g('--ink-2'),grid:g('--line-2'),bd:g('--line'),pos:g('--pos'),neg:g('--neg'),acc:g('--accent'),alt:g('--warn'),font:g('--font-num')};
+  return {bg:g('--surface'),tx:g('--ink-2'),grid:g('--line-2'),bd:g('--line'),pos:g('--pos'),neg:g('--neg'),acc:g('--accent'),alt:g('--alt'),font:g('--font-num')};
 }
 function btMake(el,h,intraday,C){
   var chart=LightweightCharts.createChart(el,{
@@ -1171,10 +1320,16 @@ function exportCsv(){
 }
 
 /* ---------- auth ---------- */
-var authMode='login';
+var authMode='login',SETUP_MSG='';
 function authMsg(m,ok){var e=$('#au-msg');e.textContent=m||'';e.className='au-msg'+(ok?' ok':'')}
+function openAuth(m){
+  setMode(m||'login');if(SETUP_MSG)authMsg(SETUP_MSG);
+  $('#au-modal').hidden=false;
+  setTimeout(function(){var e=(m==='recover')?$('#au-pw'):$('#au-email');if(e)e.focus()},30);
+}
+function closeAuth(){$('#au-modal').hidden=true}
 function showAuth(show){
-  $('#auth').hidden=!show;
+  $('#auth').hidden=!show;if(!show)closeAuth();
   $('.app').inert=!!show;$('#tabbar').inert=!!show;
 }
 function setMode(m){
@@ -1201,13 +1356,21 @@ async function enter(user){
   var h=(location.hash||'').replace('#','');if(TITLES[h])S.view=h;
   render();
 }
-function leave(){S.user=null;S.trades=[];$('#au-pw').value='';setMode('login');showAuth(true)}
+function leave(){S.user=null;S.trades=[];$('#au-pw').value='';setMode('login');showAuth(true);closeAuth()}
 
 (function boot(){
   var th=lsGet('tpd-theme');if(th)document.documentElement.dataset.theme=th;
   showAuth(true);setMode('login');
+  $$('[data-auth]').forEach(function(b){b.addEventListener('click',function(){openAuth(b.getAttribute('data-auth'))})});
+  $$('[data-scroll]').forEach(function(b){b.addEventListener('click',function(){
+    var t=document.getElementById(b.getAttribute('data-scroll'));
+    if(t)t.scrollIntoView({behavior:matchMedia('(prefers-reduced-motion: reduce)').matches?'auto':'smooth'});
+  })});
+  $('#au-x').addEventListener('click',closeAuth);
+  $('#au-modal').addEventListener('click',function(e){if(e.target===this)closeAuth()});
+  document.addEventListener('keydown',function(e){if(e.key==='Escape'&&!$('#au-modal').hidden)closeAuth()});
   if(!CFG.SUPABASE_URL||!CFG.SUPABASE_ANON_KEY||!window.supabase){
-    authMsg('Setup needed: add your Supabase URL and anon key to config.js (see README).');
+    SETUP_MSG='Setup needed: add your Supabase URL and anon key to config.js (see README).';
     $('#au-go').disabled=true;return;
   }
   sb=window.supabase.createClient(CFG.SUPABASE_URL,CFG.SUPABASE_ANON_KEY,{auth:{persistSession:true,autoRefreshToken:true,detectSessionInUrl:true}});
@@ -1238,7 +1401,7 @@ function leave(){S.user=null;S.trades=[];$('#au-pw').value='';setMode('login');s
     btn.disabled=false;
   });
   sb.auth.onAuthStateChange(function(ev,session){
-    if(ev==='PASSWORD_RECOVERY'){setTimeout(function(){showAuth(true);setMode('recover')},0);return}
+    if(ev==='PASSWORD_RECOVERY'){setTimeout(function(){showAuth(true);openAuth('recover')},0);return}
     if(ev==='SIGNED_OUT'){setTimeout(leave,0);return}
     if(session&&session.user&&authMode!=='recover'&&(!S.user||S.user.id!==session.user.id)){setTimeout(function(){enter(session.user)},0)}
   });
