@@ -265,6 +265,51 @@ textarea.field-in{min-height:84px;resize:vertical}
 .au-modal{position:fixed;inset:0;z-index:110;background:var(--scrim);display:flex;align-items:center;justify-content:center;padding:16px;overflow:auto}
 .au-card{position:relative}
 .au-x{position:absolute;top:14px;right:14px}
+/* ---- Market Pulse (animated hero) ---- */
+.lp-hero{position:relative;overflow:hidden}
+.lp-hero-in{position:relative;z-index:1}
+.lp-bg{position:absolute;inset:0;pointer-events:none;overflow:hidden;z-index:0}
+.lp-bg i{position:absolute;bottom:-90px;width:10px;border-radius:2px;background:rgba(233,195,95,.16);animation:lpfloat linear infinite}
+.lp-bg i::before{content:"";position:absolute;left:50%;top:-18px;bottom:-18px;width:1.5px;margin-left:-.75px;background:inherit}
+.lp-bg i:nth-child(3n){background:rgba(88,224,172,.13)}
+.lp-bg i:nth-child(5n){background:rgba(255,122,122,.12)}
+@keyframes lpfloat{from{transform:translateY(0);opacity:0}12%{opacity:1}88%{opacity:1}to{transform:translateY(-760px);opacity:0}}
+.lp-grain{position:absolute;inset:0;pointer-events:none;opacity:.07;z-index:0;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='2'/%3E%3C/filter%3E%3Crect width='160' height='160' filter='url(%23n)'/%3E%3C/svg%3E")}
+.lp-pulse{position:relative;background:rgba(255,255,255,.05);border:1px solid var(--hero-line);border-radius:20px;padding:16px;min-width:0;backdrop-filter:blur(6px);box-shadow:0 30px 80px -30px rgba(0,0,0,.7),0 0 0 1px rgba(233,195,95,.06) inset;transform:perspective(1100px) rotateX(var(--rx,0deg)) rotateY(var(--ry,0deg));transition:transform .25s ease-out}
+.lp-pulse::before{content:"";position:absolute;inset:-1px;border-radius:20px;padding:1px;background:conic-gradient(from var(--ang,0deg),transparent 0 70%,rgba(243,210,115,.9) 85%,transparent 100%);-webkit-mask:linear-gradient(#000 0 0) content-box,linear-gradient(#000 0 0);-webkit-mask-composite:xor;mask-composite:exclude;animation:lpspin 6s linear infinite;pointer-events:none}
+@property --ang{syntax:"<angle>";inherits:false;initial-value:0deg}
+@keyframes lpspin{to{--ang:360deg}}
+.lp-pulse-h{display:flex;justify-content:space-between;align-items:center;gap:8px;font-size:12px;color:var(--hero-mute);margin-bottom:12px}
+.lp-live{display:inline-flex;align-items:center;gap:7px;font-weight:600;letter-spacing:.08em;text-transform:uppercase;font-size:11px;color:#e6c46a}
+.lp-live::before{content:"";width:8px;height:8px;border-radius:50%;background:#58e0ac;box-shadow:0 0 0 0 rgba(88,224,172,.7);animation:lpping 1.8s infinite}
+@keyframes lpping{70%{box-shadow:0 0 0 9px rgba(88,224,172,0)}100%{box-shadow:0 0 0 0 rgba(88,224,172,0)}}
+.lp-pulse canvas{display:block;width:100%;height:300px;border-radius:12px;cursor:crosshair;touch-action:pan-y}
+.lp-pk{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:8px;margin-top:12px}
+.lp-pk div{background:rgba(255,255,255,.06);border-radius:10px;padding:9px 12px;min-width:0}
+.lp-pk small{display:block;font-size:11px;color:var(--hero-mute)}
+.lp-pk b{font-family:var(--font-num);font-weight:500;font-size:16px;overflow-wrap:anywhere;transition:color .3s}
+.lp-pk b.up{color:#58e0ac}.lp-pk b.dn{color:#ff8f8f}
+.lp-pulse-f{margin:10px 2px 0;font-size:11px;color:var(--hero-mute);opacity:.8}
+.lp-tick{overflow:hidden;border-block:1px solid var(--hero-line);background:#0b0a07;color:#e6c46a;white-space:nowrap}
+.lp-tick-in{display:inline-flex;gap:0;animation:lpmq 38s linear infinite;padding:14px 0}
+.lp-tick:hover .lp-tick-in{animation-play-state:paused}
+.lp-tick span{padding:0 26px;font-size:13px;letter-spacing:.14em;text-transform:uppercase;font-weight:600}
+.lp-tick span::after{content:"\25C6";margin-left:52px;color:#8c6a1c;font-size:9px;vertical-align:middle}
+@keyframes lpmq{to{transform:translateX(-50%)}}
+.lp-rv{opacity:0;transform:translateY(26px);transition:opacity .8s cubic-bezier(.2,.7,.2,1),transform .8s cubic-bezier(.2,.7,.2,1);transition-delay:var(--d,0s)}
+.lp-rv.in{opacity:1;transform:none}
+.lp-hero h1 span{background-size:200% 100%;animation:lpshine 6s ease-in-out infinite}
+@keyframes lpshine{0%,100%{background-position:0 0}50%{background-position:100% 0}}
+.lp-hero-copy-in>*{animation:lpup .9s cubic-bezier(.2,.7,.2,1) both}
+.lp-hero-copy-in>*:nth-child(2){animation-delay:.12s}.lp-hero-copy-in>*:nth-child(3){animation-delay:.24s}.lp-hero-copy-in>*:nth-child(4){animation-delay:.36s}.lp-hero-copy-in>*:nth-child(5){animation-delay:.48s}
+@keyframes lpup{from{opacity:0;transform:translateY(24px)}to{opacity:1;transform:none}}
+.lp-card{transition:transform .3s,border-color .3s,box-shadow .3s}
+.lp-card:hover{transform:translateY(-5px);border-color:var(--accent);box-shadow:0 18px 40px -22px rgba(201,151,28,.55)}
+@media (max-width:900px){.lp-pulse canvas{height:260px}}
+@media (prefers-reduced-motion:reduce){
+  .lp-bg i,.lp-pulse::before,.lp-tick-in,.lp-hero h1 span,.lp-live::before,.lp-hero-copy-in>*{animation:none}
+  .lp-rv{opacity:1;transform:none;transition:none}.lp-pulse{transform:none;transition:none}
+}
 @media (max-width:900px){
   .lp-hero-in{grid-template-columns:minmax(0,1fr);padding-block:48px 56px;gap:32px}
 }
@@ -412,8 +457,10 @@ details.card[open] summary{margin-bottom:12px}
 
   <div class="lp-body">
     <section class="lp-hero">
+      <div class="lp-bg" aria-hidden="true"><i style="left:4%;height:34px;animation-duration:22s;animation-delay:-3s"></i><i style="left:11%;height:60px;animation-duration:28s;animation-delay:-10s"></i><i style="left:19%;height:26px;animation-duration:19s;animation-delay:-6s"></i><i style="left:27%;height:48px;animation-duration:25s;animation-delay:-14s"></i><i style="left:36%;height:30px;animation-duration:21s;animation-delay:-2s"></i><i style="left:44%;height:70px;animation-duration:30s;animation-delay:-18s"></i><i style="left:53%;height:38px;animation-duration:23s;animation-delay:-8s"></i><i style="left:61%;height:54px;animation-duration:27s;animation-delay:-20s"></i><i style="left:70%;height:28px;animation-duration:20s;animation-delay:-5s"></i><i style="left:78%;height:64px;animation-duration:29s;animation-delay:-12s"></i><i style="left:86%;height:36px;animation-duration:24s;animation-delay:-16s"></i><i style="left:93%;height:50px;animation-duration:26s;animation-delay:-1s"></i></div>
+      <div class="lp-grain" aria-hidden="true"></div>
       <div class="lp-hero-in">
-        <div class="lp-copy">
+        <div class="lp-copy lp-hero-copy-in">
           <p class="lp-eye">Trading journal and backtester</p>
           <h1>Know why you win.<span>Fix why you lose.</span></h1>
           <p class="lp-sub">Log every trade, spot the habits that cost you money, and test your ideas on real price history. One place, built for traders.</p>
@@ -423,42 +470,41 @@ details.card[open] summary{margin-bottom:12px}
           </div>
           <p class="lp-note">Works with crypto, Indian stocks and indices, forex and your own CSV files.</p>
         </div>
-        <div class="lp-prev" aria-hidden="true">
-          <div class="lp-prev-h"><span>Example account</span><span>Last 90 days</span></div>
-          <div class="lp-kp">
-            <div><small>Net P&amp;L</small><b class="up">+₹33,532</b></div>
-            <div><small>Win rate</small><b>54.2%</b></div>
-            <div><small>Profit factor</small><b>1.31</b></div>
+        <div class="lp-pulse" role="img" aria-label="Animated demo: simulated candlesticks with moving averages, buy and sell signals and a growing equity line">
+          <div class="lp-pulse-h"><span class="lp-live">Market pulse</span><span>SMA 5 / 12 crossover</span></div>
+          <canvas id="pulse"></canvas>
+          <div class="lp-pk">
+            <div><small>Net P&amp;L</small><b id="pk-pnl" class="up">+₹0</b></div>
+            <div><small>Win rate</small><b id="pk-win">0%</b></div>
+            <div><small>Trades</small><b id="pk-tr">0</b></div>
           </div>
-          <svg viewBox="0 0 360 130" width="100%" preserveAspectRatio="none" class="lp-chart">
-            <defs><linearGradient id="lpg" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#e9c35f" stop-opacity=".35"/><stop offset="1" stop-color="#e9c35f" stop-opacity="0"/></linearGradient></defs>
-            <path d="M0 110L20 100L40 104L60 88L80 92L100 76L120 82L140 64L160 70L180 52L200 58L220 40L240 46L260 30L280 36L300 22L320 28L340 14L360 18L360 130L0 130Z" fill="url(#lpg)"/>
-            <path d="M0 110L20 100L40 104L60 88L80 92L100 76L120 82L140 64L160 70L180 52L200 58L220 40L240 46L260 30L280 36L300 22L320 28L340 14L360 18" fill="none" stroke="#e9c35f" stroke-width="2.2" stroke-linejoin="round" stroke-linecap="round" vector-effect="non-scaling-stroke"/>
-          </svg>
+          <p class="lp-pulse-f">Simulated prices for illustration. Not real market data.</p>
         </div>
       </div>
     </section>
 
+    <div class="lp-tick" aria-hidden="true"><div class="lp-tick-in"><span>Plan the trade</span><span>Trade the plan</span><span>Risk 1% per trade</span><span>Journal every entry</span><span>Review every week</span><span>Protect your capital</span><span>Edge over emotion</span><span>Plan the trade</span><span>Trade the plan</span><span>Risk 1% per trade</span><span>Journal every entry</span><span>Review every week</span><span>Protect your capital</span><span>Edge over emotion</span></div></div>
+
     <section class="lp-sec" id="lp-features">
-      <h2>Everything in one place</h2>
-      <p class="lp-lead">Record the trade, review the result, and test the next idea without leaving the page.</p>
+      <h2 class="lp-rv">Everything in one place</h2>
+      <p class="lp-lead lp-rv">Record the trade, review the result, and test the next idea without leaving the page.</p>
       <div class="lp-grid">
-        <article class="lp-card">
+        <article class="lp-card lp-rv">
           <span class="lp-ic"><svg viewBox="0 0 24 24"><path d="M5 4h11a3 3 0 0 1 3 3v13H8a3 3 0 0 1-3-3z"/><path d="M9 9h6M9 13h6"/></svg></span>
           <h3>Trade journal</h3>
           <p>Log entries, exits, stops and fees. Tag the setup and the mistake, rate how well you followed your plan, and keep notes on every trade.</p>
         </article>
-        <article class="lp-card">
+        <article class="lp-card lp-rv">
           <span class="lp-ic"><svg viewBox="0 0 24 24"><path d="M4 20V10M10 20V4M16 20v-8M22 20H2"/></svg></span>
           <h3>Performance analytics</h3>
           <p>Equity curve, win rate, profit factor, expectancy and drawdown, plus a six-part score that shows where your edge is weak.</p>
         </article>
-        <article class="lp-card">
+        <article class="lp-card lp-rv">
           <span class="lp-ic"><svg viewBox="0 0 24 24"><rect x="3" y="5" width="18" height="16" rx="2.5"/><path d="M3 10h18M8 3v4M16 3v4"/></svg></span>
           <h3>P&amp;L calendar</h3>
           <p>See every trading day at a glance, green or red, with trade counts and weekly totals.</p>
         </article>
-        <article class="lp-card" id="lp-backtest">
+        <article class="lp-card lp-rv" id="lp-backtest">
           <span class="lp-ic"><svg viewBox="0 0 24 24"><path d="M3 17l5-6 4 3 8-9"/><path d="M3 21h18"/></svg></span>
           <h3>Backtesting</h3>
           <p>Test moving-average, RSI and breakout rules on real price history from Binance, Yahoo Finance or your own CSV. Compare two assets side by side.</p>
@@ -468,7 +514,7 @@ details.card[open] summary{margin-bottom:12px}
 
     <section class="lp-band">
       <div class="lp-band-in">
-        <h2>Ready to review your trades?</h2>
+        <h2 class="lp-rv">Ready to review your trades?</h2>
         <button class="btn lp-cta" type="button" data-auth="signup">Create your account</button>
       </div>
     </section>
@@ -1406,6 +1452,156 @@ function leave(){S.user=null;S.trades=[];$('#au-pw').value='';setMode('login');s
     if(session&&session.user&&authMode!=='recover'&&(!S.user||S.user.id!==session.user.id)){setTimeout(function(){enter(session.user)},0)}
   });
 })();
+})();
+</script>
+<script>
+(function(){
+  var cv=document.getElementById('pulse');if(!cv)return;
+  var ctx=cv.getContext('2d');
+  var reduce=matchMedia('(prefers-reduced-motion: reduce)').matches;
+  var N=46,STEP=650,QTY=100;
+  var W=0,H=0,dpr=1;
+  var C=[],drift=0,regimeLeft=0,price=100;
+  function rnd(a,b){return a+Math.random()*(b-a)}
+  function nextCandle(){
+    if(regimeLeft--<=0){drift=rnd(-.55,.55);regimeLeft=Math.floor(rnd(9,20))}
+    var o=price,v=rnd(.35,1.1);
+    var c=o+drift+rnd(-1,1)*v*1.3;
+    var h=Math.max(o,c)+rnd(.05,.7)*v,l=Math.min(o,c)-rnd(.05,.7)*v;
+    price=c;return {o:o,h:h,l:l,c:c,id:C.length?C[C.length-1].id+1:0};
+  }
+  for(var i=0;i<N+30;i++)C.push(nextCandle());
+  // strategy state
+  var fast=[],slow=[];function sma(n,end){if(end<n-1)return null;var s=0;for(var k=end-n+1;k<=end;k++)s+=C[k].c;return s/n}
+  var marks=[],pos=null,eq=[0],wins=0,total=0,pnl=0;
+  function evalCross(){ // evaluate on last completed candle (index len-2 vs len-3)
+    var e=C.length-2;var f1=sma(5,e),s1=sma(12,e),f0=sma(5,e-1),s0=sma(12,e-1);
+    if(f1==null||s1==null||f0==null||s0==null)return;
+    var cp=C[e].c;
+    if(f0<=s0&&f1>s1){ if(pos){close(cp,C[e].id)} pos={side:1,px:cp};marks.push({id:C[e].id,side:1,px:cp,born:performance.now()}) }
+    else if(f0>=s0&&f1<s1){ if(pos){close(cp,C[e].id)} pos={side:-1,px:cp};marks.push({id:C[e].id,side:-1,px:cp,born:performance.now()}) }
+  }
+  function close(px,id){var g=(px-pos.px)*pos.side*QTY;pnl+=g;total++;if(g>0)wins++;eq.push(pnl);pos=null;kpi();}
+  // seed some history so numbers aren't zero
+  for(var j=0;j<260;j++){C.push(nextCandle());evalCross()}
+  // KPI
+  var elP=document.getElementById('pk-pnl'),elW=document.getElementById('pk-win'),elT=document.getElementById('pk-tr');
+  var shown={p:pnl,w:total?wins/total*100:0};var tw=null;
+  function fmt(n){return (n<0?'-':'+')+'₹'+Math.abs(Math.round(n)).toLocaleString('en-IN')}
+  elT.textContent=total;elP.textContent=fmt(pnl);elP.className=pnl>=0?'up':'dn';elW.textContent=(total?Math.round(wins/total*100):0)+'%';
+  function kpi(){if(!elT)return;elT.textContent=total;if(tw==null)tween()}
+  function tween(){
+    var tp=pnl,twn=total?wins/total*100:0;
+    shown.p+=(tp-shown.p)*.15;shown.w+=(twn-shown.w)*.15;
+    elP.textContent=fmt(shown.p);elP.className=shown.p>=0?'up':'dn';
+    elW.textContent=(total?shown.w.toFixed(0):'0')+'%';
+    if(Math.abs(tp-shown.p)>.5||Math.abs(twn-shown.w)>.3)tw=requestAnimationFrame(tween);else{shown.p=tp;shown.w=twn;elP.textContent=fmt(tp);tw=null}
+  }
+  // layout
+  function size(){
+    dpr=Math.min(window.devicePixelRatio||1,2);
+    var r=cv.getBoundingClientRect();W=Math.max(200,r.width);H=Math.max(160,r.height);
+    cv.width=Math.round(W*dpr);cv.height=Math.round(H*dpr);ctx.setTransform(dpr,0,0,dpr,0,0);
+  }
+  size();
+  if(window.ResizeObserver)new ResizeObserver(function(){size();if(reduce)draw(1,performance.now())}).observe(cv);else addEventListener('resize',size);
+  var mx=-1,my=-1;
+  cv.addEventListener('pointermove',function(e){var r=cv.getBoundingClientRect();mx=e.clientX-r.left;my=e.clientY-r.top});
+  cv.addEventListener('pointerleave',function(){mx=my=-1});
+  var yMin=0,yMax=0,init=false;
+  function ease(t){return 1-Math.pow(1-t,3)}
+  function draw(t,now){
+    ctx.clearRect(0,0,W,H);
+    var padL=8,padR=54,padT=12,eqH=Math.round(H*.2),gap=14,ph=H-padT-eqH-gap-6;
+    var pw=W-padL-padR,cw=pw/N,bw=Math.max(3,cw*.58);
+    var last=C.length-1; // forming candle
+    var tt=ease(t);
+    var fc=C[last],cur={o:fc.o,c:fc.o+(fc.c-fc.o)*tt,h:0,l:0};
+    cur.h=Math.max(cur.o,cur.c,fc.o+(fc.h-fc.o)*t);cur.l=Math.min(cur.o,cur.c,fc.o-(fc.o-fc.l)*t);
+    var vis=[];for(var i=last-N;i<=last;i++){if(i>=0)vis.push(i)}
+    var mn=1e9,mx2=-1e9;vis.forEach(function(i){var c=i===last?cur:C[i];if(c.l<mn)mn=c.l;if(c.h>mx2)mx2=c.h});
+    var pad=(mx2-mn)*.12;mn-=pad;mx2+=pad;
+    if(!init){yMin=mn;yMax=mx2;init=true}else{yMin+=(mn-yMin)*.08;yMax+=(mx2-yMax)*.08}
+    function Y(v){return padT+(1-(v-yMin)/(yMax-yMin))*ph}
+    var off=-t*cw; // scroll
+    function X(i){return padL+(i-(last-N))*cw+off+cw/2}
+    // grid
+    ctx.strokeStyle='rgba(255,236,190,.07)';ctx.lineWidth=1;ctx.fillStyle='rgba(205,194,166,.7)';ctx.font='10px IBM Plex Mono, monospace';ctx.textAlign='left';
+    for(var g=0;g<=4;g++){var gy=Math.round(padT+g/4*ph)+.5;ctx.beginPath();ctx.moveTo(padL,gy);ctx.lineTo(W-padR+6,gy);ctx.stroke();
+      var gv=yMax-(yMax-yMin)*g/4;ctx.fillText(gv.toFixed(1),W-padR+10,gy+3)}
+    // MA lines
+    function line(n,col,w){
+      ctx.beginPath();var started=false;
+      for(var i=last-N;i<=last;i++){if(i<n-1||i<0)continue;var v;
+        if(i===last){var s=0;for(var k=i-n+1;k<i;k++)s+=C[k].c;v=(s+cur.c)/n}else v=sma(n,i);
+        var x=X(i),y=Y(v);if(!started){ctx.moveTo(x,y);started=true}else ctx.lineTo(x,y)}
+      ctx.strokeStyle=col;ctx.lineWidth=w;ctx.lineJoin='round';ctx.shadowColor=col;ctx.shadowBlur=w>1.5?10:0;ctx.stroke();ctx.shadowBlur=0}
+    // candles
+    for(var q=0;q<vis.length;q++){var i2=vis[q],c=i2===last?cur:C[i2],x=X(i2),up=c.c>=c.o;
+      var col=up?'#58e0ac':'#ff7a7a';
+      var fade=Math.min(1,Math.max(.25,(x-padL)/60));
+      ctx.globalAlpha=fade;ctx.strokeStyle=col;ctx.fillStyle=col;ctx.lineWidth=1.3;
+      ctx.beginPath();ctx.moveTo(x,Y(c.h));ctx.lineTo(x,Y(c.l));ctx.stroke();
+      var top=Y(Math.max(c.o,c.c)),bh=Math.max(1.5,Math.abs(Y(c.o)-Y(c.c)));
+      ctx.fillRect(x-bw/2,top,bw,bh);ctx.globalAlpha=1}
+    line(12,'rgba(150,170,255,.85)',1.4);
+    line(5,'#f3d273',2);
+    // signals
+    marks=marks.filter(function(m){return m.id>=C[Math.max(0,last-N-2)].id});
+    marks.forEach(function(m){
+      var idx=C.findIndex(function(c){return c.id===m.id});if(idx<0)return;
+      var x=X(idx);if(x<padL)return;var age=Math.min(1,(now-m.born)/450),sc=age<1?1+Math.sin(age*Math.PI)*.5:1;
+      var up=m.side>0,y=Y(m.px)+(up?20:-20);
+      ctx.save();ctx.translate(x,y);ctx.scale(sc,sc);ctx.globalAlpha=age;
+      ctx.fillStyle=up?'#f3d273':'#ff8f8f';ctx.shadowColor=ctx.fillStyle;ctx.shadowBlur=12;
+      ctx.beginPath();if(up){ctx.moveTo(0,-7);ctx.lineTo(7,5);ctx.lineTo(-7,5)}else{ctx.moveTo(0,7);ctx.lineTo(7,-5);ctx.lineTo(-7,-5)}ctx.closePath();ctx.fill();
+      ctx.shadowBlur=0;ctx.font='600 9px Schibsted Grotesk, sans-serif';ctx.textAlign='center';ctx.fillStyle='#fbf6e8';
+      ctx.fillText(up?'BUY':'SELL',0,up?19:-12);ctx.restore()});
+    // live price tag
+    var py=Y(cur.c);ctx.setLineDash([3,4]);ctx.strokeStyle='rgba(243,210,115,.5)';ctx.lineWidth=1;ctx.beginPath();ctx.moveTo(padL,py);ctx.lineTo(W-padR+6,py);ctx.stroke();ctx.setLineDash([]);
+    ctx.fillStyle=cur.c>=cur.o?'#58e0ac':'#ff7a7a';ctx.fillRect(W-padR+6,py-8,48,16);ctx.fillStyle='#0b0a07';ctx.font='600 10px IBM Plex Mono, monospace';ctx.fillText(cur.c.toFixed(1),W-padR+10,py+3.5);
+    // equity strip
+    var ey=H-eqH-2;ctx.fillStyle='rgba(205,194,166,.65)';ctx.font='10px Schibsted Grotesk, sans-serif';ctx.fillText('Equity (simulated)',padL,ey-3);
+    var pts=eq.length>1?eq:[0,0],emn=Math.min.apply(null,pts),emx=Math.max.apply(null,pts);if(emx-emn<50){emx+=25;emn-=25}
+    function EY(v){return ey+4+(1-(v-emn)/(emx-emn))*(eqH-8)}
+    var cnt=pts.length,ex=function(k){return padL+k/(Math.max(cnt-1,1))*pw};
+    var gr=ctx.createLinearGradient(0,ey,0,ey+eqH);gr.addColorStop(0,'rgba(243,210,115,.3)');gr.addColorStop(1,'rgba(243,210,115,0)');
+    ctx.beginPath();pts.forEach(function(v,k){var x=ex(k),y=EY(v);k?ctx.lineTo(x,y):ctx.moveTo(x,y)});
+    ctx.lineTo(ex(cnt-1),ey+eqH);ctx.lineTo(ex(0),ey+eqH);ctx.closePath();ctx.fillStyle=gr;ctx.fill();
+    ctx.beginPath();pts.forEach(function(v,k){var x=ex(k),y=EY(v);k?ctx.lineTo(x,y):ctx.moveTo(x,y)});
+    ctx.strokeStyle='#f3d273';ctx.lineWidth=1.8;ctx.shadowColor='#f3d273';ctx.shadowBlur=8;ctx.stroke();ctx.shadowBlur=0;
+    var lx=ex(cnt-1),ly=EY(pts[cnt-1]);ctx.beginPath();ctx.arc(lx,ly,3+Math.sin(now/260)*.8,0,7);ctx.fillStyle='#fff3c4';ctx.shadowColor='#f3d273';ctx.shadowBlur=12;ctx.fill();ctx.shadowBlur=0;
+    // crosshair
+    if(mx>=0&&my>=0&&my<padT+ph){ctx.strokeStyle='rgba(255,236,190,.35)';ctx.setLineDash([2,4]);ctx.beginPath();ctx.moveTo(mx,padT);ctx.lineTo(mx,padT+ph);ctx.moveTo(padL,my);ctx.lineTo(W-padR+6,my);ctx.stroke();ctx.setLineDash([]);
+      var pv=yMax-(my-padT)/ph*(yMax-yMin);ctx.fillStyle='#f3d273';ctx.fillRect(W-padR+6,my-8,48,16);ctx.fillStyle='#0b0a07';ctx.fillText(pv.toFixed(1),W-padR+10,my+3.5)}
+  }
+  var t0=performance.now(),running=false,raf=0,visible=true;
+  function frame(now){
+    raf=0;if(!running)return;
+    var el=now-t0;
+    while(el>=STEP){C.push(nextCandle());if(C.length>400)C.shift();evalCross();t0+=STEP;el-=STEP}
+    draw(el/STEP,now);raf=requestAnimationFrame(frame);
+  }
+  function start(){if(reduce||running||!visible||document.hidden)return;running=true;t0=performance.now();raf=requestAnimationFrame(frame)}
+  function stop(){running=false;if(raf)cancelAnimationFrame(raf);raf=0}
+  if(reduce){ // static snapshot with a few trades
+    for(var s=0;s<60;s++){C.push(nextCandle());evalCross()}
+    kpi();draw(1,performance.now()+1000);
+  }else{
+    if('IntersectionObserver' in window)new IntersectionObserver(function(es){visible=es[0].isIntersecting;visible?start():stop()}).observe(cv);
+    document.addEventListener('visibilitychange',function(){document.hidden?stop():start()});
+    start();
+  }
+  // tilt
+  var card=cv.closest('.lp-pulse');
+  if(card&&!reduce&&matchMedia('(hover:hover)').matches){
+    card.addEventListener('pointermove',function(e){var r=card.getBoundingClientRect();var px=(e.clientX-r.left)/r.width-.5,py=(e.clientY-r.top)/r.height-.5;card.style.setProperty('--ry',(px*7).toFixed(2)+'deg');card.style.setProperty('--rx',(-py*7).toFixed(2)+'deg')});
+    card.addEventListener('pointerleave',function(){card.style.setProperty('--ry','0deg');card.style.setProperty('--rx','0deg')});
+  }
+  // reveal on scroll
+  var rv=document.querySelectorAll('#auth .lp-rv');
+  if('IntersectionObserver' in window&&!reduce){var io=new IntersectionObserver(function(es){es.forEach(function(e){if(e.isIntersecting){e.target.classList.add('in');io.unobserve(e.target)}})},{threshold:.12});rv.forEach(function(n,i){n.style.setProperty('--d',(i%4)*.08+'s');io.observe(n)})}
+  else rv.forEach(function(n){n.classList.add('in')});
 })();
 </script>
 </body>
