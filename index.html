@@ -195,6 +195,41 @@ input[type=range]{width:100%;accent-color:var(--gold);height:28px}
 footer{padding:26px 0 calc(34px + env(safe-area-inset-bottom,0));border-top:1px solid var(--line);color:var(--dim);font-size:13px;position:relative;z-index:2}
 footer .wrap{display:flex;flex-wrap:wrap;justify-content:space-between;gap:10px 24px}
 
+
+/* orbit logo */
+.orbit{position:relative;width:var(--s,120px);height:var(--s,120px);flex:none}
+.orbit svg{position:absolute;inset:0;width:100%;height:100%;overflow:visible}
+.orbit img{position:absolute;left:29%;top:29%;width:42%;height:42%;border-radius:24%;box-shadow:0 0 24px rgba(233,195,95,.35)}
+.orbit .tk{stroke-linecap:round;transform-box:fill-box;transform-origin:50% 100%;animation:tk 2.6s ease-in-out infinite;animation-delay:calc(var(--i)*-.11s)}
+@keyframes tk{50%{transform:scaleY(.38)}}
+.orbit .r1,.orbit .r2,.orbit .r3{transform-box:view-box;transform-origin:50% 50%}
+.orbit .r1{animation:rot 18s linear infinite}.orbit .r2{animation:rot 26s linear infinite reverse}.orbit .r3{animation:rot 5s linear infinite}
+@keyframes rot{to{transform:rotate(360deg)}}
+.logo .orbit{margin:-6px 2px -6px -8px}
+#wipe{position:fixed;inset:0;z-index:120;background:linear-gradient(180deg,#f3d273,#c9971c);transform:translateY(101%);transition:transform .55s cubic-bezier(.7,0,.2,1);pointer-events:none}
+#wipe.go{transform:none;pointer-events:all}
+/* social */
+.soc{display:inline-flex;align-items:center;gap:10px;color:var(--ink);transition:transform .3s var(--ease),border-color .3s,background .3s}
+.soc svg{width:20px;height:20px;stroke:currentColor;fill:none;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round;flex:none}
+.soc.off{opacity:.45;cursor:default}
+.dock{position:fixed;left:18px;top:50%;transform:translateY(-50%);z-index:60;display:flex;flex-direction:column;gap:10px;opacity:0;pointer-events:none;transition:opacity .5s}
+.dock.show{opacity:1;pointer-events:auto}
+.dock .soc{width:42px;height:42px;justify-content:center;border:1px solid var(--line);border-radius:50%;background:rgba(8,7,6,.7);backdrop-filter:blur(8px);-webkit-backdrop-filter:blur(8px)}
+.dock .soc:not(.off):hover{transform:translateX(5px) scale(1.08);border-color:var(--gold);color:var(--gold)}
+.socgrid{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:12px;margin-top:34px;text-align:left}
+.socgrid .soc{border:1px solid var(--line);border-radius:16px;padding:18px;background:rgba(255,255,255,.03);flex-direction:column;align-items:flex-start;gap:14px;min-width:0}
+.socgrid .soc b{display:block;font-size:16px}.socgrid .soc small{color:var(--mute);font-size:13px}
+.socgrid .soc:not(.off):hover{transform:translateY(-5px);border-color:var(--gold);background:rgba(233,195,95,.07)}
+.socgrid .soc svg{width:26px;height:26px;stroke:var(--gold)}
+.fsoc{display:flex;gap:14px}.fsoc .soc{color:var(--mute)}.fsoc .soc:not(.off):hover{color:var(--gold)}
+/* monte carlo */
+.mcbox{border:1px solid var(--line);border-radius:14px;padding:14px;background:rgba(255,255,255,.03)}
+.mc-h{display:flex;justify-content:space-between;align-items:center;gap:10px;font-size:13px;color:var(--mute);margin-bottom:10px}
+.mc-h .btn{padding:7px 14px;font-size:13px;border-radius:9px}
+#mc{display:block;width:100%;height:190px}
+#mc-s{font-size:13px;color:var(--mute);margin-top:8px}
+@media (max-width:1360px){.dock{display:none}}
+@media (max-width:960px){.socgrid{grid-template-columns:repeat(2,minmax(0,1fr))}}
 @media (max-width:960px){
   .hero-in{grid-template-columns:minmax(0,1fr);gap:40px}
   .nav-links,.nav .btn{display:none}.burger{display:flex}
@@ -231,20 +266,22 @@ footer .wrap{display:flex;flex-wrap:wrap;justify-content:space-between;gap:10px 
 <body>
 <div id="prog"></div>
 <div id="glow"></div>
-<div id="pre" aria-hidden="true"><img src="logo-icon.png" alt=""><div class="bar"><i></i></div><p>Sreejith Trade Paradox</p></div>
+<div id="wipe"></div>
+<div class="dock" id="dock" aria-label="Social links"></div>
+<div id="pre" aria-hidden="true"><div class="orb" data-s="170"></div><div class="bar"><i></i></div><p>Sreejith Trade Paradox</p></div>
 
 <header class="nav" id="nav">
   <div class="wrap nav-in">
-    <a class="logo" href="#top"><img src="logo-icon.png" alt="" width="36" height="36"><span>Sreejith Trade Paradox</span></a>
+    <a class="logo" href="#top"><span class="orb" data-s="54"></span><span>Sreejith Trade Paradox</span></a>
     <nav class="nav-links" aria-label="Main">
       <a href="#strategy">GXT Strategy</a><a href="#features">Features</a><a href="#risk">Risk Lab</a><a href="#contact">Contact</a>
     </nav>
-    <a class="btn gold mag" href="journal.html" target="_blank" rel="noopener">Open Journal <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M7 17L17 7M8 7h9v9"/></svg></a>
+    <a class="btn gold mag" href="journal.html">Open Journal <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M7 17L17 7M8 7h9v9"/></svg></a>
     <button class="burger" id="burger" aria-label="Menu" aria-expanded="false" aria-controls="menu"><i></i><i></i></button>
   </div>
 </header>
 <nav class="menu" id="menu" aria-label="Mobile">
-  <a href="#strategy">GXT Strategy</a><a href="#features">Features</a><a href="#risk">Risk Lab</a><a href="#contact">Contact</a><a href="journal.html" target="_blank" rel="noopener" style="color:var(--gold)">Open Journal &#8599;</a>
+  <a href="#strategy">GXT Strategy</a><a href="#features">Features</a><a href="#risk">Risk Lab</a><a href="#contact">Contact</a><a href="journal.html" style="color:var(--gold)">Open Journal &#8599;</a>
 </nav>
 
 <main id="top">
@@ -261,12 +298,12 @@ footer .wrap{display:flex;flex-wrap:wrap;justify-content:space-between;gap:10px 
       <p class="lead fade" style="--i:1">The GXT strategy, a private trading journal, a backtester and risk tools. Everything a serious trader needs to stay consistent, built in one place.</p>
       <div class="cta fade" style="--i:2">
         <a class="btn gold mag" href="#strategy">Explore GXT</a>
-        <a class="btn ghost mag" href="journal.html" target="_blank" rel="noopener">Open the Journal &#8599;</a>
+        <a class="btn ghost mag" href="journal.html">Open the Journal &#8599;</a>
       </div>
       <div class="badges fade" style="--i:3"><span>Crypto</span><span>Indian stocks and indices</span><span>Forex</span><span>Your own CSV</span></div>
     </div>
-    <div class="gxt fade" style="--i:2" id="gxtcard" role="img" aria-label="Animated demo of the GXT engine: simulated candlesticks, entry, stop and target boxes, volume profile and a growing equity line">
-      <div class="gxt-h"><span class="live">GXT engine</span><span>Demo &middot; 2R target</span></div>
+    <div class="gxt fade" style="--i:2" id="gxtcard" role="img" aria-label="Animated demo of the live trading terminal: simulated candlesticks, entry, stop and target boxes, volume profile and a growing equity line">
+      <div class="gxt-h"><span class="live">Paradox Live</span><span>Simulated &middot; 2R target</span></div>
       <canvas id="eng"></canvas>
       <div class="kp">
         <div><small>Net P&amp;L</small><b id="k-pnl" class="up">+&#8377;0</b></div>
@@ -328,16 +365,16 @@ footer .wrap{display:flex;flex-wrap:wrap;justify-content:space-between;gap:10px 
 <section id="features" class="sec wrap">
   <p class="tag rv">What you get</p>
   <h2 class="rv">Built around <em>your</em> process.</h2>
-  <p class="sub rv">Open the journal in its own page, test an idea, size a trade. Each tool is simple and works with the others.</p>
+  <p class="sub rv">Log a trade, test an idea, size a position. Each tool is simple and works with the others.</p>
   <div class="fgrid">
-    <a class="card big rv" href="journal.html" target="_blank" rel="noopener">
+    <a class="card big rv" href="journal.html">
       <span class="ic"><svg viewBox="0 0 24 24"><path d="M5 4h11a3 3 0 0 1 3 3v13H8a3 3 0 0 1-3-3z"/><path d="M9 9h6M9 13h6"/></svg></span>
       <h3>Trading journal</h3>
       <p>Log entries, exits, stops and fees. Tag the setup and the mistake, rate how well you followed the plan, and see your equity curve, win rate, profit factor and drawdown update as you go.</p>
       <div class="mini" aria-hidden="true"><i style="--h:30%;--k:0"></i><i style="--h:46%;--k:1"></i><i style="--h:38%;--k:2"></i><i style="--h:62%;--k:3"></i><i style="--h:54%;--k:4"></i><i style="--h:78%;--k:5"></i><i style="--h:66%;--k:6"></i><i style="--h:92%;--k:7"></i><i style="--h:80%;--k:8"></i><i style="--h:100%;--k:9"></i></div>
-      <span class="go">Open journal in a new page <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M7 17L17 7M8 7h9v9"/></svg></span>
+      <span class="go">Open the journal <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M7 17L17 7M8 7h9v9"/></svg></span>
     </a>
-    <a class="card rv" href="journal.html#backtest" target="_blank" rel="noopener">
+    <a class="card rv" href="journal.html#backtest">
       <span class="ic"><svg viewBox="0 0 24 24"><path d="M3 17l5-6 4 3 8-9"/><path d="M3 21h18"/></svg></span>
       <h3>Backtester</h3>
       <p>Test rules on real history from Binance, Yahoo Finance or your CSV. Compare two assets side by side.</p>
@@ -391,6 +428,11 @@ footer .wrap{display:flex;flex-wrap:wrap;justify-content:space-between;gap:10px 
         <div><small>Reward if target hits</small><b id="r-rew">&#8377;0</b></div>
       </div>
       <div class="edge" id="r-edge"></div>
+      <div class="mcbox">
+        <div class="mc-h"><span>100 trades &middot; 36 simulated paths</span><button class="btn ghost" id="mc-run" type="button">Run again</button></div>
+        <canvas id="mc" aria-label="Simulated equity paths over 100 trades"></canvas>
+        <p id="mc-s"></p>
+      </div>
       <p class="note" style="margin:0">Educational calculator. It does not account for fees or slippage and is not financial advice.</p>
     </div>
   </div>
@@ -398,20 +440,23 @@ footer .wrap{display:flex;flex-wrap:wrap;justify-content:space-between;gap:10px 
 
 <section id="contact" class="cta-band">
   <div class="wrap">
+    <div class="orb" data-s="150" style="margin:0 auto 18px"></div>
     <p class="tag rv">Get started</p>
     <h2 class="rv">Ready to trade with a <em>plan</em>?</h2>
     <p class="sub rv" style="margin-inline:auto">Create a free journal account, log your first trade and let the numbers show you what to fix.</p>
     <div class="cta rv" style="justify-content:center">
-      <a class="btn gold mag" href="journal.html#signup" target="_blank" rel="noopener">Create free account</a>
-      <a class="btn ghost mag" href="journal.html" target="_blank" rel="noopener">Log in</a>
+      <a class="btn gold mag" href="journal.html#signup">Create free account</a>
+      <a class="btn ghost mag" href="journal.html">Log in</a>
     </div>
-    <div class="pills rv"><span>Mentorship enquiries: coming soon</span><span>Community: coming soon</span></div>
+    <div class="socgrid rv" id="socgrid"></div>
+    <div class="pills rv"><span>Mentorship enquiries: coming soon</span></div>
   </div>
 </section>
 </main>
 
-<footer><div class="wrap"><p>&copy; <span id="yr"></span> Sreejith Trade Paradox</p><p>Trading involves risk. Demos use simulated data. Backtests use past data and do not predict future results.</p></div></footer>
+<footer><div class="wrap"><p>&copy; <span id="yr"></span> Sreejith Trade Paradox</p><div class="fsoc" id="fsoc"></div><p>Trading involves risk. Demos use simulated data. Backtests use past data and do not predict future results.</p></div></footer>
 
+<script src="social.js"></script>
 <script>
 (function(){
 'use strict';
@@ -464,31 +509,48 @@ if('IntersectionObserver' in window&&!reduce){
   rvs.forEach(function(n,i){n.style.setProperty('--d',(i%3)*.09+'s');io.observe(n)});
 }else{rvs.forEach(function(n){n.classList.add('in');var c=$('[data-n]',n);if(c)count(c)})}
 
-/* ===== Hero flow-field background ===== */
+/* ===== Hero candle skyline + embers ===== */
 (function(){
-  var cv=$('#flow'),x=cv.getContext('2d'),W,H,dpr,P=[],mx=-999,my=-999,vis=true,raf=0;
+  var cv=$('#flow'),x=cv.getContext('2d'),W=0,H=0,dpr=1,mx=0,my=0,sx=0,sy=0,vis=true,raf=0,lt=0;
+  var LY=[{cw:9,sp:9,a:.075,band:.30,base:.56,d:5},{cw:15,sp:20,a:.14,band:.38,base:.70,d:12},{cw:26,sp:42,a:.26,band:.46,base:.90,d:26}];
+  function rnd(a,b){return a+Math.random()*(b-a)}
+  function nextC(L){var o=L.p,c=o+(.5-o)*.035+rnd(-1,1)*.075;c=Math.max(.04,Math.min(.96,c));var h=Math.max(o,c)+rnd(0,.04),l=Math.min(o,c)-rnd(0,.04);L.p=c;return{o:o,c:c,h:h,l:l}}
+  var E=[];
   function size(){dpr=Math.min(devicePixelRatio||1,2);var r=cv.getBoundingClientRect();W=r.width;H=r.height;cv.width=W*dpr;cv.height=H*dpr;x.setTransform(dpr,0,0,dpr,0,0);
-    var n=Math.round(Math.min(130,W*H/9000));P=[];for(var i=0;i<n;i++)P.push({x:Math.random()*W,y:Math.random()*H,l:Math.random()*200,s:.4+Math.random()*.9})}
+    LY.forEach(function(L){L.p=.5;L.off=0;L.c=[];var n=Math.ceil(W/L.cw)+4;for(var i=0;i<n;i++)L.c.push(nextC(L))});
+    E=[];var ne=Math.round(Math.min(90,W*H/14000));for(var i=0;i<ne;i++)E.push({x:Math.random()*W,y:Math.random()*H,v:rnd(10,38),s:rnd(.6,2.2),ph:rnd(0,6.28),w:rnd(.4,1.2)})}
   size();addEventListener('resize',size);
-  cv.parentNode.addEventListener('pointermove',function(e){var r=cv.getBoundingClientRect();mx=e.clientX-r.left;my=e.clientY-r.top});
-  cv.parentNode.addEventListener('pointerleave',function(){mx=my=-999});
-  function ang(px,py,t){return Math.sin(px*.0032+t*.00018)*1.7+Math.cos(py*.0041-t*.00013)*1.7-.35}
-  function tick(t){
-    raf=0;if(!vis)return;
-    x.globalCompositeOperation='destination-out';x.fillStyle='rgba(0,0,0,.075)';x.fillRect(0,0,W,H);x.globalCompositeOperation='source-over';
-    for(var i=0;i<P.length;i++){var p=P[i],a=ang(p.x,p.y,t),dx=Math.cos(a)*p.s,dy=Math.sin(a)*p.s;
-      var ddx=p.x-mx,ddy=p.y-my,d2=ddx*ddx+ddy*ddy;if(d2<19000){var f=(1-d2/19000)*2.6,d=Math.sqrt(d2)||1;dx+=ddx/d*f;dy+=ddy/d*f}
-      var ox=p.x,oy=p.y;p.x+=dx;p.y+=dy;p.l++;
-      if(p.x<0||p.x>W||p.y<0||p.y>H||p.l>260){p.x=Math.random()*W;p.y=Math.random()*H;p.l=0;continue}
-      var al=Math.sin(Math.min(1,p.l/260)*Math.PI)*.75;
-      x.strokeStyle=(i%7===0)?'rgba(150,170,255,'+al*.8+')':'rgba(233,195,95,'+al+')';x.lineWidth=1.2;x.beginPath();x.moveTo(ox,oy);x.lineTo(p.x,p.y);x.stroke()}
-    raf=requestAnimationFrame(tick);
+  var hero=cv.parentNode;
+  hero.addEventListener('pointermove',function(e){var r=hero.getBoundingClientRect();mx=(e.clientX-r.left)/r.width-.5;my=(e.clientY-r.top)/r.height-.5});
+  function draw(t,dt){
+    x.clearRect(0,0,W,H);sx+=(mx-sx)*.05;sy+=(my-sy)*.05;
+    LY.forEach(function(L,li){
+      if(dt){L.off-=L.sp*dt;while(L.off<=-L.cw){L.off+=L.cw;L.c.shift();L.c.push(nextC(L))}}
+      var ox=-sx*L.d*2,oy=-sy*L.d,bw=Math.max(2,L.cw*.62);
+      function Y(v){return H*L.base-v*H*L.band+oy}
+      for(var i=0;i<L.c.length;i++){var k=L.c[i],cx=i*L.cw+L.off+L.cw/2+ox,up=k.c>=k.o;
+        var fade=Math.min(1,Math.max(0,cx/(W*.18)))*Math.min(1,Math.max(0,(W-cx)/(W*.1)+.4))*(W>960&&cx<W*.52?.4:1);
+        x.fillStyle=x.strokeStyle=up?'rgba(233,195,95,'+(L.a*fade)+')':'rgba(255,122,122,'+(L.a*.8*fade)+')';
+        x.lineWidth=1;x.beginPath();x.moveTo(cx,Y(k.h));x.lineTo(cx,Y(k.l));x.stroke();
+        x.fillRect(cx-bw/2,Y(Math.max(k.o,k.c)),bw,Math.max(1.5,Math.abs(Y(k.o)-Y(k.c))))}
+      if(li===2){ // glowing close line on the nearest layer
+        x.save();x.beginPath();for(var j=0;j<L.c.length;j++){var px=j*L.cw+L.off+L.cw/2+ox,py=Y(L.c[j].c);j?x.lineTo(px,py):x.moveTo(px,py)}
+        var lg=x.createLinearGradient(0,0,W,0),wide=W>960;lg.addColorStop(0,'rgba(243,210,115,'+(wide?.14:.4)+')');lg.addColorStop(wide?.5:.5,'rgba(243,210,115,'+(wide?.2:.5)+')');lg.addColorStop(wide?.66:.7,'rgba(243,210,115,.6)');lg.addColorStop(1,'rgba(243,210,115,.6)');x.strokeStyle=lg;x.lineWidth=1.6;x.shadowColor='#e9c35f';x.shadowBlur=14;x.stroke();x.restore()}
+    });
+    x.globalCompositeOperation='lighter';
+    for(var q=0;q<E.length;q++){var e=E[q];if(dt){e.y-=e.v*dt;e.x+=Math.sin(t*.0007*e.w+e.ph)*.25;if(e.y<-8){e.y=H+8;e.x=Math.random()*W}}
+      var al=(.35+.65*Math.abs(Math.sin(t*.0012*e.w+e.ph)))*Math.min(1,e.y/(H*.25));
+      x.fillStyle='rgba(243,210,115,'+al*.12+')';x.beginPath();x.arc(e.x-sx*18,e.y-sy*8,e.s*4,0,7);x.fill();
+      x.fillStyle='rgba(255,236,170,'+al*.85+')';x.beginPath();x.arc(e.x-sx*18,e.y-sy*8,e.s*.9,0,7);x.fill()}
+    x.globalCompositeOperation='source-over';
   }
-  function go(){if(!raf&&vis&&!reduce)raf=requestAnimationFrame(tick)}
-  if(!reduce){new IntersectionObserver(function(e){vis=e[0].isIntersecting;if(vis)go()}).observe(cv);document.addEventListener('visibilitychange',function(){vis=!document.hidden;if(vis)go()});go()}
+  function tick(t){raf=0;if(!vis)return;var dt=lt?Math.min(.05,(t-lt)/1000):0;lt=t;draw(t,dt);raf=requestAnimationFrame(tick)}
+  function go(){if(!raf&&vis&&!reduce){lt=0;raf=requestAnimationFrame(tick)}}
+  if(reduce)draw(0,0);
+  else{new IntersectionObserver(function(e){vis=e[0].isIntersecting;if(vis)go()}).observe(cv);document.addEventListener('visibilitychange',function(){vis=!document.hidden;if(vis)go()});go()}
 })();
 
-/* ===== GXT engine panel ===== */
+/* ===== Live terminal panel ===== */
 (function(){
   var cv=$('#eng'),x=cv.getContext('2d');
   var N=46,STEP=700,RISK=1000,W=0,H=0,dpr=1;
@@ -568,7 +630,7 @@ if('IntersectionObserver' in window&&!reduce){
         var sc=age<1?1+Math.sin(age*Math.PI)*.35:1;x.save();x.translate(x1,win?yT:yS);x.scale(sc,sc);x.globalAlpha=age*(done?.95:1);
         x.fillStyle=win?'#58e0ac':'#ff7a7a';x.shadowColor=x.fillStyle;x.shadowBlur=12;x.beginPath();x.arc(0,0,3.6,0,7);x.fill();x.shadowBlur=0;
         x.font='700 10px IBM Plex Mono,monospace';x.textAlign='right';x.fillText(win?'+2R':'-1R',-6,win?-6:13);x.restore();x.globalAlpha=1}
-      if(!done){x.font='600 9px Schibsted Grotesk,sans-serif';x.fillStyle='#fbf6e8';x.textAlign='left';x.fillText((tr.side>0?'GXT LONG':'GXT SHORT'),x0+4,tr.side>0?yE+12:yE-5)}
+      if(!done){x.font='600 9px Schibsted Grotesk,sans-serif';x.fillStyle='#fbf6e8';x.textAlign='left';x.fillText((tr.side>0?'LONG':'SHORT'),x0+4,tr.side>0?yE+12:yE-5)}
     });
     // candles
     for(i=s0;i<=last;i++){if(i<0)continue;c=i===last?cur:C[i];var cx=X(i),up=c.c>=c.o,col=up?'#58e0ac':'#ff7a7a';
@@ -642,6 +704,76 @@ var story=(function(){
     e.innerHTML='Expectancy: <b class="'+(ex>=0?'up':'dn')+'">'+(ex>=0?'+':'')+ex.toFixed(2)+'R</b> per trade. Over 100 trades at this risk that is about <b class="'+(ex>=0?'up':'dn')+'">'+(after>=0?'+':'-')+inr(Math.abs(after))+'</b>.'+(per===0?' Entry and stop cannot be the same.':'');
   }
   Object.keys(f).forEach(function(k){f[k].addEventListener('input',calc)});calc();
+})();
+
+/* ===== Orbit logo ===== */
+function orbitSVG(n){
+  var g='',i,a,len;
+  for(i=0;i<n;i++){a=i*360/n;len=7+(Math.sin(i*.9)+Math.sin(i*2.3)+2)*5.5;
+    var col=i%9===0?'#58e0ac':(i%9===4?'#ff8f8f':'#e9c35f');
+    g+='<g transform="rotate('+a.toFixed(1)+' 100 100)"><line class="tk" style="--i:'+i+'" x1="100" y1="'+(100-64)+'" x2="100" y2="'+(100-64-len).toFixed(1)+'" stroke="'+col+'" stroke-width="3.4"/></g>'}
+  return '<svg viewBox="0 0 200 200" aria-hidden="true"><defs><linearGradient id="og" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#ffe9a8"/><stop offset="1" stop-color="#c9971c"/></linearGradient></defs>'+
+    '<circle class="r1" cx="100" cy="100" r="56" fill="none" stroke="#e9c35f" stroke-opacity=".5" stroke-width="1" stroke-dasharray="2 6"/>'+
+    '<circle class="r3" cx="100" cy="100" r="56" fill="none" stroke="url(#og)" stroke-width="2.4" stroke-linecap="round" stroke-dasharray="46 306"/>'+
+    '<circle class="r2" cx="100" cy="100" r="97" fill="none" stroke="#e9c35f" stroke-opacity=".35" stroke-width="1" stroke-dasharray="1 9"/>'+g+'</svg>'}
+$$('.orb').forEach(function(el){var sz=+el.dataset.s||120;el.classList.add('orbit');el.style.setProperty('--s',sz+'px');el.innerHTML=orbitSVG(sz<80?24:40)+'<img src="logo-icon.png" alt="" width="'+sz*.42+'" height="'+sz*.42+'">'});
+
+/* ===== Social links (edit social.js) ===== */
+(function(){
+  var S=window.SOCIAL||{};
+  var items=[
+    ['instagram','Instagram','Daily charts and trade reviews','<rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.3" cy="6.7" r=".6" fill="currentColor"/>'],
+    ['youtube','YouTube','Lessons and walkthroughs','<rect x="2.5" y="5" width="19" height="14" rx="4"/><path d="M10 9.2l5 2.8-5 2.8z" fill="currentColor"/>'],
+    ['x','X (Twitter)','Market thoughts and updates','<path d="M4 4l16 16M20 4L4 20"/>'],
+    ['telegram','Telegram','Community and alerts','<path d="M21 4L3 11l6 2.2L11 20l3-4.2 4.5 3.4z"/><path d="M9 13.2L21 4"/>']];
+  function a(it,full){var url=S[it[0]],on=!!url,svg='<svg viewBox="0 0 24 24" aria-hidden="true">'+it[3]+'</svg>';
+    var inner=full?svg+'<span><b>'+it[1]+'</b><small>'+(on?it[2]:'Link coming soon')+'</small></span>':svg;
+    return on?'<a class="soc" href="'+url+'" target="_blank" rel="noopener" aria-label="'+it[1]+'">'+inner+'</a>':'<span class="soc off" role="img" aria-label="'+it[1]+' (link coming soon)" title="'+it[1]+': link coming soon">'+inner+'</span>'}
+  $('#dock').innerHTML=items.map(function(i){return a(i,false)}).join('');
+  $('#fsoc').innerHTML=items.map(function(i){return a(i,false)}).join('');
+  $('#socgrid').innerHTML=items.map(function(i){return a(i,true)}).join('');
+  var dock=$('#dock');function dk(){dock.classList.toggle('show',scrollY>innerHeight*.6)}addEventListener('scroll',dk,{passive:true});dk();
+})();
+
+/* ===== Page wipe into the journal (same tab) ===== */
+(function(){
+  var w=$('#wipe');
+  $$('a[href^="journal.html"]').forEach(function(l){l.addEventListener('click',function(e){
+    if(e.metaKey||e.ctrlKey||e.shiftKey||e.button)return;e.preventDefault();toggleMenu(false);
+    if(reduce){location.href=l.getAttribute('href');return}
+    w.classList.add('go');setTimeout(function(){location.href=l.getAttribute('href')},560)})});
+  addEventListener('pageshow',function(){w.classList.remove('go')});
+})();
+
+/* ===== Monte Carlo paths ===== */
+(function(){
+  var cv=$('#mc'),x=cv.getContext('2d'),W=0,H=0,dpr=1,paths=[],med=[],t0=0,raf=0,T=100,P=36;
+  function size(){dpr=Math.min(devicePixelRatio||1,2);var r=cv.getBoundingClientRect();W=r.width;H=r.height;cv.width=W*dpr;cv.height=H*dpr;x.setTransform(dpr,0,0,dpr,0,0);paint(1)}
+  function sim(){
+    var wr=+$('#l-wr').value/100,rm=+$('#l-rm').value,rk=+$('#l-risk').value/100;paths=[];
+    for(var p=0;p<P;p++){var e=100,a=[100];for(var t=0;t<T;t++){e*=Math.random()<wr?1+rk*rm:1-rk;a.push(e)}paths.push(a)}
+    med=[];for(var t2=0;t2<=T;t2++){var col=paths.map(function(a){return a[t2]}).sort(function(a,b){return a-b});med.push((col[P/2-1]+col[P/2])/2)}
+    var fin=paths.map(function(a){return a[T]}),prof=fin.filter(function(v){return v>100}).length,sorted=fin.slice().sort(function(a,b){return a-b});
+    var pc=function(v){return (v>=100?'+':'-')+Math.abs(v-100).toFixed(0)+'%'};
+    $('#mc-s').textContent=prof+' of '+P+' paths ended in profit. Median '+pc(med[T])+', worst '+pc(sorted[0])+', best '+pc(sorted[P-1])+'. Same edge, very different journeys.';
+  }
+  function paint(p){
+    if(!paths.length)return;x.clearRect(0,0,W,H);
+    var all=[];paths.forEach(function(a){all.push(a[T])});all.sort(function(a,b){return a-b});
+    var hi=Math.max(all[Math.floor(P*.92)]*1.05,112),lo=Math.min(all[0]*.97,92);
+    function Y(v){return H-6-(Math.min(v,hi)-lo)/(hi-lo)*(H-14)}function X(i){return 4+i/T*(W-8)}
+    x.strokeStyle='rgba(255,236,190,.1)';x.setLineDash([4,5]);x.beginPath();x.moveTo(0,Y(100));x.lineTo(W,Y(100));x.stroke();x.setLineDash([]);
+    var n=Math.max(1,Math.floor(p*T));
+    paths.forEach(function(a){var up=a[T]>100;x.beginPath();for(var i=0;i<=n;i++)i?x.lineTo(X(i),Y(a[i])):x.moveTo(X(i),Y(a[i]));x.strokeStyle=up?'rgba(233,195,95,.30)':'rgba(255,122,122,.26)';x.lineWidth=1.1;x.stroke()});
+    x.beginPath();for(var i2=0;i2<=n;i2++)i2?x.lineTo(X(i2),Y(med[i2])):x.moveTo(X(i2),Y(med[i2]));x.strokeStyle='#fff3c4';x.lineWidth=2.4;x.shadowColor='#e9c35f';x.shadowBlur=12;x.stroke();x.shadowBlur=0;
+    x.beginPath();x.arc(X(n),Y(med[n]),3.4,0,7);x.fillStyle='#fff3c4';x.fill();
+  }
+  function run(){sim();cancelAnimationFrame(raf);if(reduce){paint(1);return}t0=performance.now();(function f(t){var p=Math.min(1,(t-t0)/1500);paint(1-Math.pow(1-p,3));if(p<1)raf=requestAnimationFrame(f)})(t0)}
+  size();if(window.ResizeObserver)new ResizeObserver(function(){var r=cv.getBoundingClientRect();if(Math.abs(r.width-W)>1)size()}).observe(cv);
+  var tm=0;function later(){clearTimeout(tm);tm=setTimeout(run,260)}
+  ['l-risk','l-rm','l-wr'].forEach(function(id){$('#'+id).addEventListener('input',later)});
+  $('#mc-run').addEventListener('click',run);
+  if('IntersectionObserver' in window){var io2=new IntersectionObserver(function(e){if(e[0].isIntersecting){run();io2.disconnect()}},{threshold:.3});io2.observe(cv)}else run();
 })();
 
 onScroll();
